@@ -66,3 +66,5 @@ CREATE TABLE proveedor (
   descripcion TEXT
 );
 
+
+
