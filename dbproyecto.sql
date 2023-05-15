@@ -69,18 +69,20 @@ CREATE TABLE proveedor (
 
 --Procedimientos almacenados:
 --Crear Productos
-CREATE TABLE producto (
-    id_producto INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_producto VARCHAR(255),
-    descripcion TEXT,
-    precio DECIMAL(10,2),
-    stock_actual INT,
-    stock_minimo INT CHECK (stock_minimo <=150),
-    stock_maximo INT CHECK (stock_maximo <=500),
-    fecharegistro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    id_categoria INT,
-    FOREIGN KEY (id_categoria) REFERENCES categoria (id_categoria)
-);
+CREATE PROCEDURE crearProducto(
+  IN p_nombre VARCHAR(255),
+  IN p_descripcion TEXT,
+  IN p_precio DECIMAL(10,2),
+  IN p_stock_actual INT,
+  IN p_stock_minimo INT,
+  IN p_stock_maximo INT,
+  IN p_id_categoria INT
+)
+BEGIN
+  INSERT INTO producto (nombre_producto, descripcion, precio, stock_actual, stock_minimo, stock_maximo, id_categoria)
+  VALUES (p_nombre, p_descripcion, p_precio, p_stock_actual, p_stock_minimo, p_stock_maximo, p_id_categoria);
+END;
+
 
 --Listar Productos
 CREATE PROCEDURE listarProductos()
