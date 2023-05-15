@@ -69,6 +69,9 @@ CREATE TABLE proveedor (
 
 --Procedimientos almacenados:
 --Crear Productos
+
+DELIMITER //
+
 CREATE PROCEDURE crearProducto(
   IN p_nombre VARCHAR(255),
   IN p_descripcion TEXT,
@@ -79,18 +82,27 @@ CREATE PROCEDURE crearProducto(
   IN p_id_categoria INT
 )
 BEGIN
-  INSERT INTO producto (nombre_producto, descripcion, precio, stock_actual, stock_minimo, stock_maximo, id_categoria)
-  VALUES (p_nombre, p_descripcion, p_precio, p_stock_actual, p_stock_minimo, p_stock_maximo, p_id_categoria);
-END;
+  INSERT INTO producto (nombre_producto, descripcion, precio, stock_actual, stock_minimo, stock_maximo, fecharegistro, id_categoria)
+  VALUES (p_nombre, p_descripcion, p_precio, p_stock_actual, p_stock_minimo, p_stock_maximo, CURRENT_TIMESTAMP, p_id_categoria);
+END //
+
+DELIMITER ;
 
 
 --Listar Productos
+DELIMITER //
+
 CREATE PROCEDURE listarProductos()
 BEGIN
   SELECT * FROM producto;
-END;
+END // 
+
+DELIMITER ; 
+
 
 --Actualizar Productos
+DELIMITER //
+
 CREATE PROCEDURE actualizarProducto(
   IN p_id_producto INT,
   IN p_nombre VARCHAR(255),
@@ -109,15 +121,26 @@ BEGIN
       stock_actual = p_stock_actual,
       stock_minimo = p_stock_minimo,
       stock_maximo = p_stock_maximo,
+      fecharegistro = CURRENT_TIMESTAMP,
       id_categoria = p_id_categoria
   WHERE id_producto = p_id_producto;
-END;
+END //
+
+DELIMITER ;
+
+
+
 
 --Eliminar Productos
+DELIMITER //
+
 CREATE PROCEDURE borrarProducto(
   IN p_id_producto INT
 )
 BEGIN
   DELETE FROM producto
   WHERE id_producto = p_id_producto;
-END;
+END //
+
+DELIMITER ;
+
