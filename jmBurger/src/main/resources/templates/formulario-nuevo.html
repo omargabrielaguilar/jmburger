@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Producto</title>
+</head>
+<body>
+    <h1>Crear Producto</h1>
+    <form action="/productos/nuevo" method="post">
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombreProducto" required>
+        </div>
+        <div>
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" required></textarea>
+        </div>
+        <div>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" step="0.01" required>
+        </div>
+        <div>
+            <label for="stockActual">Stock Actual:</label>
+            <input type="number" id="stockActual" name="stockActual" required>
+        </div>
+        <div>
+            <label for="stockMinimo">Stock Mínimo:</label>
+            <input type="number" id="stockMinimo" name="stockMinimo" required>
+        </div>
+        <div>
+            <label for="stockMaximo">Stock Máximo:</label>
+            <input type="number" id="stockMaximo" name="stockMaximo" required>
+        </div>
+        <div>
+            <label for="categoria">Categoría:</label>
+            <select id="categoria" name="categoria.nombreCategoria" required>
+                <option th:each="categoria : ${categorias}" th:value="${categoria.nombreCategoria}" th:text="${categoria.nombreCategoria}"></option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Guardar</button>
+        </div>
+    </form>
+</body>
+</html>

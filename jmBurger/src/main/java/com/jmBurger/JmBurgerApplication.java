@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class JmBurgerApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(JmBurgerApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(JmBurgerApplication.class, args);
+    }
 }

@@ -98,39 +98,47 @@ DELIMITER //
 
 CREATE PROCEDURE listarProductos()
 BEGIN
-  SELECT * FROM producto;
-END // 
+  SELECT p.id_producto, p.nombre_producto, p.descripcion, p.precio, p.stock_actual, p.stock_minimo, p.stock_maximo, p.fecharegistro, c.nombre_categoria
+  FROM producto p
+  INNER JOIN categoria c ON p.id_categoria = c.id_categoria;
+END //
 
-DELIMITER ; 
-
+DELIMITER ;
 
 --Actualizar Productos
 DELIMITER //
 
 CREATE PROCEDURE actualizarProducto(
   IN p_id_producto INT,
-  IN p_nombre VARCHAR(255),
+  IN p_nombre_producto VARCHAR(255),
   IN p_descripcion TEXT,
   IN p_precio DECIMAL(10,2),
   IN p_stock_actual INT,
   IN p_stock_minimo INT,
   IN p_stock_maximo INT,
-  IN p_id_categoria INT
+  IN p_nombre_categoria VARCHAR(55)
 )
 BEGIN
+  DECLARE v_id_categoria INT;
+
+  -- Obtener el ID de categoría basado en el nombre proporcionado
+  SELECT id_categoria INTO v_id_categoria FROM categoria WHERE nombre_categoria = p_nombre_categoria;
+
+  -- Actualizar el producto
   UPDATE producto
-  SET nombre_producto = p_nombre,
+  SET nombre_producto = p_nombre_producto,
       descripcion = p_descripcion,
       precio = p_precio,
       stock_actual = p_stock_actual,
       stock_minimo = p_stock_minimo,
       stock_maximo = p_stock_maximo,
-      fecharegistro = CURRENT_TIMESTAMP,
-      id_categoria = p_id_categoria
+      id_categoria = v_id_categoria
   WHERE id_producto = p_id_producto;
 END //
 
 DELIMITER ;
+
+
 
 --Eliminar Productos
 DELIMITER //
