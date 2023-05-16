@@ -29,7 +29,7 @@
                 <td th:text="${producto.stockMaximo}"></td>
                 <td th:text="${producto.categoria.nombreCategoria}"></td>
                 <td>
-                    <a th:href="@{/productos/{id}/editar(id=${producto.idProducto})}">Editar</a>
+					<a th:href="@{/productos/{id}/editar(id=${producto.idProducto})}">Editar</a>
                     <a th:href="@{/productos/borrar/{id}(id=${producto.idProducto})}">Eliminar</a>
                 </td>                
             </tr>
