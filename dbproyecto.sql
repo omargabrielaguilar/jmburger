@@ -69,7 +69,6 @@ CREATE TABLE proveedor (
 
 --Procedimientos almacenados:
 --Crear Productos
-
 DELIMITER //
 
 CREATE PROCEDURE crearProducto(
@@ -79,15 +78,20 @@ CREATE PROCEDURE crearProducto(
   IN p_stock_actual INT,
   IN p_stock_minimo INT,
   IN p_stock_maximo INT,
-  IN p_id_categoria INT
+  IN p_nombre_categoria VARCHAR(55)
 )
 BEGIN
+  DECLARE v_id_categoria INT;
+
+  -- Obtener el ID de categoría basado en el nombre proporcionado
+  SELECT id_categoria INTO v_id_categoria FROM categoria WHERE nombre_categoria = p_nombre_categoria;
+
+  -- Insertar el nuevo producto
   INSERT INTO producto (nombre_producto, descripcion, precio, stock_actual, stock_minimo, stock_maximo, fecharegistro, id_categoria)
-  VALUES (p_nombre, p_descripcion, p_precio, p_stock_actual, p_stock_minimo, p_stock_maximo, CURRENT_TIMESTAMP, p_id_categoria);
+  VALUES (p_nombre, p_descripcion, p_precio, p_stock_actual, p_stock_minimo, p_stock_maximo, CURRENT_TIMESTAMP, v_id_categoria);
 END //
 
 DELIMITER ;
-
 
 --Listar Productos
 DELIMITER //
@@ -127,9 +131,6 @@ BEGIN
 END //
 
 DELIMITER ;
-
-
-
 
 --Eliminar Productos
 DELIMITER //
