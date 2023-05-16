@@ -153,3 +153,12 @@ END //
 
 DELIMITER ;
 
+--Agregamos unas categorias
+INSERT INTO categoria (nombre_categoria, descripcion) VALUES ('Carnes', 'Categoría de carnes para hamburgesas');
+
+INSERT INTO categoria (nombre_categoria, descripcion) VALUES ('Panes', 'Categoría de panes para hamburgesas');
+
+
+--Probamos el script
+CALL crearProducto('Pan Bimbo', 'Pan de maiz', 10.99, 50, 10, 100, 'Panes');
+
