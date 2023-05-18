@@ -1,0 +1,6 @@
+package com.jmBurger.entity;
+
+@Entity
+public class Producto {
+	
+}
