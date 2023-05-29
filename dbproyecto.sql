@@ -30,7 +30,7 @@ CREATE TABLE usuario (
   nombre_usuario VARCHAR(255) NOT NULL,
   correo_electronico VARCHAR(255) NOT NULL,
   id_categoria_usuario INT NOT NULL,
-  contraseña_hash VARCHAR(255) NOT NULL,
+  contrasenia_hash VARCHAR(255) NOT NULL,
   CONSTRAINT fk_categoria_usuario
     FOREIGN KEY (id_categoria_usuario)
     REFERENCES categoria_usuario(id_categoria_usuario),

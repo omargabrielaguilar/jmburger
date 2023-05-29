@@ -41,11 +41,20 @@ public class CategoriaController {
         Categoria categoria = categoriaRepository.findById(id)
                 .orElseThrow(() -> new
                         IllegalArgumentException("Categoria no encontrada con ID: " + id));
-
         model.addAttribute("categoria", categoria);
         return "editarCategoria";
     }
 
+    @PostMapping("categorias/{id}/editar")
+    public String actualizarCategoria(@PathVariable("id") int id, @ModelAttribute("categoria") Categoria categoria){
+        categoria.setIdCategoria(id);
+        categoriaRepository.save(categoria);
+        return "redirect:/categorias";
+    }
 
-
+    @GetMapping("categorias/{id}/borrar")
+    public String borrarCategoria(@PathVariable("id") int id){
+        categoriaRepository.deleteById(id);
+        return  "redirect:/categorias";
+    }
 }
