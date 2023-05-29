@@ -21,20 +21,20 @@ public class ProductoController {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 
-	@GetMapping("/productos")
+	@GetMapping("productos")
 	public String listarProductos(Model model) {
 		model.addAttribute("productos", productoRepository.findAll());
 		return "productos";
 	}
 
-	@GetMapping("/productos/nuevo")
+	@GetMapping("productos/nuevo")
 	public String mostrarFormularioNuevo(Model model) {
 		model.addAttribute("producto", new Producto());
 		model.addAttribute("categorias", categoriaRepository.findAll());
-		return "formulario-nuevo";
+		return "nuevoProducto";
 	}
 
-	@PostMapping("/productos/nuevo")
+	@PostMapping("productos/nuevo")
 	public String crearProducto(@ModelAttribute("producto") Producto producto) {
 		// Verificar si la categoría ya existe en la base de datos
 		Categoria categoria = categoriaRepository.findByNombreCategoria(producto.getCategoria().getNombreCategoria());
@@ -52,17 +52,17 @@ public class ProductoController {
 		return "redirect:/productos";
 	}
 
-	@GetMapping("/productos/{id}/editar")
+	@GetMapping("productos/{id}/editar")
 	public String mostrarFormularioEditar(@PathVariable("id") int id, Model model) {
 		Producto producto = productoRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + id));
 
 		model.addAttribute("producto", producto);
 		model.addAttribute("categorias", categoriaRepository.findAll());
-		return "formulario-editar";
+		return "editarProducto";
 	}
 
-	@PostMapping("/productos/{id}/editar")
+	@PostMapping("productos/{id}/editar")
 	public String actualizarProducto(@PathVariable("id") int id, @ModelAttribute("producto") Producto producto) {
 		producto.setIdProducto(id);
 
@@ -82,7 +82,7 @@ public class ProductoController {
 		return "redirect:/productos";
 	}
 
-	@GetMapping("/productos/{id}/borrar")
+	@GetMapping("productos/{id}/borrar")
 	public String borrarProducto(@PathVariable("id") int id) {
 		productoRepository.deleteById(id);
 		return "redirect:/productos";
