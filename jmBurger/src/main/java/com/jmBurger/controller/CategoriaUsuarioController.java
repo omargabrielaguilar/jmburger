@@ -16,46 +16,45 @@ public class CategoriaUsuarioController {
     @Autowired
     private CategoriaUsuarioRepository categoriaUsuarioRepository;
 
-    @GetMapping("categoriausurios")
+    @GetMapping("categoriausuarios")
     public String listarCategoriaUsuarios(Model model){
-        model.addAttribute("categoriausurios",
+        model.addAttribute("categoriausuarios",
                 categoriaUsuarioRepository.findAll());
-        return "categoriausurios";
+        return "categoriausuarios";
     }
 
-    @GetMapping("categoriausurios/nuevo")
+    @GetMapping("categoriausuarios/nuevo")
     public String mostrarFormularioNuevo(Model model){
         model.addAttribute("categoriausuario",
                 new CategoriaUsuario());
         return "nuevaCategoriaUsuario";
     }
 
-    @PostMapping("categoriausurios/nuevo")
+    @PostMapping("categoriausuarios/nuevo")
     public String crearCategoriaUsuario(@ModelAttribute("categoriausuario") CategoriaUsuario categoriaUsuario){
         categoriaUsuarioRepository.save(categoriaUsuario);
-        return "redirect:/categoriausurios";
+        return "redirect:/categoriausuarios";
     }
 
-    @GetMapping("categoriausurios/{id}/editar")
+    @GetMapping("categoriausuarios/{id}/editar")
     public String mostrarFormularioEditar(@PathVariable("id") int id, Model model){
         CategoriaUsuario categoriaUsuario = categoriaUsuarioRepository.findById(id)
                 .orElseThrow(() -> new
                         IllegalArgumentException("CategoriaUsuario no encontrada con ID: " + id));
-        model.addAttribute("categoriaUsuario", categoriaUsuario);
+        model.addAttribute("categoriausuario", categoriaUsuario);
         return "editarCategoriaUsuario";
     }
 
-    @PostMapping("categoriausurios/{id}/editar")
+    @PostMapping("categoriausuarios/{id}/editar")
     public String actualizarCategoriaUsuario(@PathVariable("id") int id, @ModelAttribute("categoriausuario") CategoriaUsuario categoriaUsuario){
         categoriaUsuario.setIdCategoriaUsuario(id);
         categoriaUsuarioRepository.save(categoriaUsuario);
-        return "redirect:/categoriausurios";
+        return "redirect:/categoriausuarios";
     }
 
-    @GetMapping("categoriausurios/{id}/borrar")
+    @GetMapping("categoriausuarios/{id}/borrar")
     public String borrarCategoriaUsuario(@PathVariable("id") int id){
         categoriaUsuarioRepository.deleteById(id);
-        return  "redirect:/categoriausurios";
+        return  "redirect:/categoriausuarios";
     }
-
 }
