@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.jmBurger.entity.CategoriaUsuario;
 import com.jmBurger.entity.Usuario;
-import com.jmBurger.repository.UsuarioRepository;
-import com.jmBurger.repository.CategoriaUsuarioRepository;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
