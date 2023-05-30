@@ -59,7 +59,7 @@ public class UsuarioController {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + id));
         model.addAttribute("usuario", usuario);
-        model.addAttribute("categorias", categoriaUsuarioRepository.findAll());
+        model.addAttribute("categoriaUsuarios", categoriaUsuarioRepository.findAll());
         return "editarUsuarios";
     }
 
