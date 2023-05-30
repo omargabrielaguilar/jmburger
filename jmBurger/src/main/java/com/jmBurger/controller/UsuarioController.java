@@ -32,7 +32,7 @@ public class UsuarioController {
     @GetMapping("usuarios/nuevo")
     public String mostrarFormularioNuevo(Model model){
         model.addAttribute("usuario", new Usuario());
-        model.addAttribute("categoriaUsuario", categoriaUsuarioRepository.findAll());
+        model.addAttribute("categoriaUsuarios", categoriaUsuarioRepository.findAll());
         return "nuevoUsuario";
     }
 

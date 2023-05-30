@@ -34,8 +34,8 @@
     </div>
     <div class="mb-3">
       <label for="categoriaUsuario" class="form-label">Categoría Usuario:</label>
-      <select id="categoriaUsuario" name="usuario.categoriaUsuario.nombreCategoriaUsuario" class="form-select" required>
-        <option th:each="categoriaUsuario : ${categoriaUsuario}" th:value="${categoriaUsuario.nombreCategoriaUsuario}" th:text="${categoriaUsuario.nombreCategoriaUsuario}"></option>
+      <select id="categoriaUsuario" name="categoriaUsuario.nombreCategoriaUsuario" class="form-select" required>
+        <option th:each="categoriaUsuario : ${categoriaUsuarios}" th:value="${categoriaUsuario.nombreCategoriaUsuario}" th:text="${categoriaUsuario.nombreCategoriaUsuario}"></option>
       </select>
     </div>
     <div>
