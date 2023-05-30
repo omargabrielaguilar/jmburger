@@ -22,15 +22,15 @@
         <input type="hidden" th:field="*{idUsuario}">
         <div class="mb-3">
             <label for="nombreUsuario" class="form-label">Nombre:</label>
-            <input type="text" id="nombreUsuario" name="nombreUsuario" class="form-control" required>
+            <input type="text" id="nombreUsuario" th:field="*{nombreUsuario}" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="correoElectronico" class="form-label">Correo Electronico:</label>
-            <textarea id="correoElectronico" name="correoElectronico" class="form-control" required></textarea>
+            <textarea id="correoElectronico" th:field="*{correoElectronico}" class="form-control" required></textarea>
         </div>
         <div class="mb-3">
             <label for="contraseniaHash" class="form-label">Contrasenia:</label>
-            <input type="contraseniaHash" id="contraseniaHash" name="contraseniaHash" step="0.01" class="form-control" required>
+            <input type="password" id="contraseniaHash" th:field="*{contraseniaHash}" step="0.01" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="categoriaUsuario" class="form-label">Categoría Usuario:</label>
