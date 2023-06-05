@@ -66,12 +66,20 @@ CREATE TABLE proveedor (
   descripcion TEXT
 );
 
---Agregamos unas categorias
 INSERT INTO categoria (nombre_categoria, descripcion) VALUES ('Carnes', 'Categoría de carnes para hamburgesas');
 
 INSERT INTO categoria (nombre_categoria, descripcion) VALUES ('Panes', 'Categoría de panes para hamburgesas');
 
 
---Probamos el script
 CALL crearProducto('Pan Bimbo', 'Pan de maiz', 10.99, 50, 10, 100, 'Panes');
+
+CREATE TABLE produccion (
+  id_produccion INT AUTO_INCREMENT PRIMARY KEY,
+  fecha_produccion DATETIME NOT NULL,
+  id_pedido INT NOT NULL,
+  id_producto INT NOT NULL,
+  cantidad_producida INT NOT NULL,
+  FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido),
+  FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
+);
 
