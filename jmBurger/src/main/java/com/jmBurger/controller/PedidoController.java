@@ -54,7 +54,34 @@ public class PedidoController {
 
     @GetMapping("pedidos/{id}/editar")
     public String mostrarFormularioEditar(@PathVariable("id") int id, Model model){
+        Pedido pedido = pedidoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Pedido no encontrado con ID: " + id));
 
+        model.addAttribute("pedido", pedido);
+        model.addAttribute("usuario", usuarioRepository.findAll());
+
+        return "editarPedidos";
+    }
+
+    @PostMapping("pedidos/{id}/editar")
+    public String actualizarPedido(@PathVariable("id") int id, @ModelAttribute("pedido") Pedido pedido){
+        pedido.setIdPedido(id);
+
+        Usuario usuario = usuarioRepository.findByNombreUsuario(pedido.getUsuario().getNombreUsuario());
+
+        if(usuario == null){
+            usuario = new Usuario();
+            usuario.setNombreUsuario(pedido.getUsuario().getNombreUsuario());
+            usuarioRepository.save(usuario);
+        }
+        pedido.setUsuario(usuario);
+        pedidoRepository.save(pedido);
+        return "redirect:/pedidos";
+    }
+
+    @GetMapping("pedidos/{id}/borrar")
+    public String borrarPedido(@PathVariable("id") int id){
+        pedidoRepository.deleteById(id);
+        return "redirect:/pedidos";
     }
 
 }
