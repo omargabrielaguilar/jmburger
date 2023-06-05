@@ -27,9 +27,9 @@ public class Pedido {
     private Usuario usuario;
 
     public enum EstadoPedido {
-        PENDIENTE,
-        EN_EJECUCIÓN,
-        ENTREGADO
+        pendiente,
+        en_ejecucion,
+        entregado
     }
 
     public Pedido(){}
