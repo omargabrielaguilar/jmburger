@@ -1,5 +1,5 @@
-create database jmburger;
-use jmburger;
+create database prueba;
+use prueba;
 
 CREATE TABLE categoria (
   id_categoria INT AUTO_INCREMENT PRIMARY KEY,
@@ -16,7 +16,6 @@ CREATE TABLE producto (
     id_producto INT AUTO_INCREMENT PRIMARY KEY,
     nombre_producto VARCHAR(255),
     descripcion TEXT,
-    precio DECIMAL(10,2),
     stock_actual INT,
     stock_minimo INT CHECK (stock_minimo <=150),
     stock_maximo INT CHECK (stock_maximo <=500),
@@ -37,13 +36,26 @@ CREATE TABLE usuario (
   UNIQUE (correo_electronico)
 );
 
+CREATE TABLE proveedor (
+  id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_proveedor VARCHAR(255) NOT NULL,
+  direccion VARCHAR(255),
+  telefono VARCHAR(20),
+  precio DECIMAL(10,2),
+  correo_electronico VARCHAR(255),
+  sitio_web VARCHAR(255),
+  descripcion TEXT
+);
+
 CREATE TABLE pedido (
   id_pedido INT AUTO_INCREMENT PRIMARY KEY,
   fecha_pedido DATETIME NOT NULL,
   estado_pedido ENUM('pendiente', 'en_ejecucion', 'entregado') NOT NULL,
   comentarios VARCHAR(255),
   id_usuario INT NOT NULL,
-  FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+  id_proveedor INT NOT NULL,
+  FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+  FOREIGN KEY (id_proveedor) REFERENCES proveedor(id_proveedor)
 );
 
 CREATE TABLE detalle_pedido (
@@ -52,26 +64,17 @@ CREATE TABLE detalle_pedido (
   id_producto INT NOT NULL,
   cantidad INT NOT NULL,
   precio_unitario DECIMAL(10,2) NOT NULL,
+  precio_total DECIMAL(10, 2) AS (cantidad * precio_unitario),
+  fecharegistro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido),
   FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
 
-CREATE TABLE proveedor (
-  id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
-  nombre_proveedor VARCHAR(255) NOT NULL,
-  direccion VARCHAR(255),
-  telefono VARCHAR(20),
-  correo_electronico VARCHAR(255),
-  sitio_web VARCHAR(255),
-  descripcion TEXT
-);
+
 
 INSERT INTO categoria (nombre_categoria, descripcion) VALUES ('Carnes', 'Categoría de carnes para hamburgesas');
 
 INSERT INTO categoria (nombre_categoria, descripcion) VALUES ('Panes', 'Categoría de panes para hamburgesas');
-
-
-CALL crearProducto('Pan Bimbo', 'Pan de maiz', 10.99, 50, 10, 100, 'Panes');
 
 CREATE TABLE produccion (
   id_produccion INT AUTO_INCREMENT PRIMARY KEY,
@@ -79,7 +82,18 @@ CREATE TABLE produccion (
   id_pedido INT NOT NULL,
   id_producto INT NOT NULL,
   cantidad_producida INT NOT NULL,
-  FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido),
   FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
+
+CREATE TABLE detalle_produccion (
+  id_detalle_produccion INT AUTO_INCREMENT PRIMARY KEY,
+  id_produccion INT NOT NULL,
+  id_producto INT NOT NULL,
+  cantidad_producida INT NOT NULL,
+  FOREIGN KEY (id_produccion) REFERENCES produccion(id_produccion),
+  FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
+);
+
+
+
 
