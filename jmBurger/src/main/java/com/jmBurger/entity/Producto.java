@@ -25,9 +25,6 @@ public class Producto {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "precio")
-    private double precio;
-
     @Column(name = "stock_actual")
     private int stockActual;
 
@@ -50,11 +47,10 @@ public class Producto {
     }
 
     // Constructor sin la clave primaria "idProducto"
-    public Producto(String nombreProducto, String descripcion, double precio, int stockActual,
+    public Producto(String nombreProducto, String descripcion, int stockActual,
                     int stockMinimo, int stockMaximo, Timestamp fechaRegistro, Categoria categoria) {
         this.nombreProducto = nombreProducto;
         this.descripcion = descripcion;
-        this.precio = precio;
         this.stockActual = stockActual;
         this.stockMinimo = stockMinimo;
         this.stockMaximo = stockMaximo;
@@ -86,14 +82,6 @@ public class Producto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
     }
 
     public int getStockActual() {
