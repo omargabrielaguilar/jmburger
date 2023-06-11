@@ -1,5 +1,5 @@
-create database prueba;
-use prueba;
+create database jmburger;
+use jmburger;
 
 CREATE TABLE categoria (
   id_categoria INT AUTO_INCREMENT PRIMARY KEY,
@@ -96,4 +96,4 @@ CREATE TABLE detalle_produccion (
 
 
 
-
+--Correción de crud producto y trabajar con demas tablas
