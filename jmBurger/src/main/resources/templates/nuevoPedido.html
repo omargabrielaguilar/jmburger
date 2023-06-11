@@ -57,6 +57,13 @@
         <option th:each="usuario : ${usuario}" th:value="${usuario.nombreUsuario}" th:text="${usuario.nombreUsuario}"></option>
       </select>
     </div>
+
+    <div class="mb-3">
+      <label for="proveedor" class="form-label">Nombre Proveedor:</label>
+      <select id="proveedor" name="proveedor.nombreProveedor" class="form-select" required>
+        <option th:each="proveedor : ${proveedor}" th:value="${proveedor.nombreProveedor}" th:text="${proveedor.nombreProveedor}"></option>
+      </select>
+    </div>
     <div>
       <button type="submit" class="btn btn-primary">Guardar</button>
     </div>

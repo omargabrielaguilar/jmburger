@@ -47,6 +47,12 @@ public class PedidoController {
         Usuario usuario = usuarioRepository.findByNombreUsuario(pedido.getUsuario().getNombreUsuario());
         Proveedor proveedor = proveedorRepository.findByNombreProveedor(pedido.getProveedor().getNombreProveedor());
 
+        if(proveedor == null){
+            proveedor = new Proveedor();
+            proveedor.setNombreProveedor(pedido.getProveedor().getNombreProveedor());
+            proveedorRepository.save(proveedor);
+        }
+
         if(usuario == null){
             usuario = new Usuario();
             usuario.setNombreUsuario(pedido.getUsuario().getNombreUsuario());
@@ -54,10 +60,10 @@ public class PedidoController {
         }
 
         pedido.setUsuario(usuario);
+        pedido.setProveedor(proveedor);
         pedidoRepository.save(pedido);
         return "redirect:/pedidos";
     }
-
 
     @GetMapping("pedidos/{id}/editar")
     public String mostrarFormularioEditar(@PathVariable("id") int id, Model model){
@@ -65,22 +71,31 @@ public class PedidoController {
 
         model.addAttribute("pedido", pedido);
         model.addAttribute("usuario", usuarioRepository.findAll());
+        model.addAttribute("proveedor", proveedorRepository.findAll());
 
-        return "editarPedidos";
+        return "editarPedido";
     }
 
     @PostMapping("pedidos/{id}/editar")
     public String actualizarPedido(@PathVariable("id") int id, @ModelAttribute("pedido") Pedido pedido){
         pedido.setIdPedido(id);
-
         Usuario usuario = usuarioRepository.findByNombreUsuario(pedido.getUsuario().getNombreUsuario());
+        Proveedor proveedor = proveedorRepository.findByNombreProveedor(pedido.getProveedor().getNombreProveedor());
 
         if(usuario == null){
             usuario = new Usuario();
             usuario.setNombreUsuario(pedido.getUsuario().getNombreUsuario());
             usuarioRepository.save(usuario);
         }
+
+        if(proveedor == null){
+            proveedor = new Proveedor();
+            proveedor.setNombreProveedor(pedido.getProveedor().getNombreProveedor());
+            proveedorRepository.save(proveedor);
+        }
+
         pedido.setUsuario(usuario);
+        pedido.setProveedor(proveedor);
         pedidoRepository.save(pedido);
         return "redirect:/pedidos";
     }

@@ -27,7 +27,8 @@
       <th>Fecha Pedido</th>
       <th>Estado</th>
       <th>Comentarios</th>
-      <th>NombreUsuario</th>
+      <th>Nombre Usuario</th>
+      <th>Nombre Proveedor</th>
       <th>Acciones</th>
     </tr>
     </thead>
@@ -38,6 +39,7 @@
       <td th:text="${pedido.estadoPedido}"></td>
       <td th:text="${pedido.comentarios}"></td>
       <td th:text="${pedido.usuario.nombreUsuario}"></td>
+      <td th:text="${pedido.proveedor.nombreProveedor}"></td>
       <td>
         <a class="btn btn-primary btn-sm" th:href="@{pedidos/{id}/editar(id=${pedido.idPedido})}">Editar</a>
         <a class="btn btn-danger btn-sm" th:href="@{pedidos/{id}/borrar(id=${pedido.idPedido})}">Eliminar</a>
