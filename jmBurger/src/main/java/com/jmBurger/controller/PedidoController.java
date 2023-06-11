@@ -1,4 +1,6 @@
 package com.jmBurger.controller;
+import com.jmBurger.entity.Proveedor;
+import com.jmBurger.repository.ProveedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,9 @@ public class PedidoController {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
+    private ProveedorRepository proveedorRepository;
+
+    @Autowired
     private PedidoRepository pedidoRepository;
 
     @GetMapping("pedidos")
@@ -32,13 +37,15 @@ public class PedidoController {
         model.addAttribute("pedido", new Pedido());
         model.addAttribute("usuario",
                 usuarioRepository.findAll());
+        model.addAttribute("proveedor",
+                proveedorRepository.findAll());
         return "nuevoPedido";
     }
 
     @PostMapping("pedidos/nuevo")
     public String crearPedido(@ModelAttribute("pedido") Pedido pedido){
         Usuario usuario = usuarioRepository.findByNombreUsuario(pedido.getUsuario().getNombreUsuario());
-
+        Proveedor proveedor = proveedorRepository.findByNombreProveedor(pedido.getProveedor().getNombreProveedor());
 
         if(usuario == null){
             usuario = new Usuario();

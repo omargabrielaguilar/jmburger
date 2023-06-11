@@ -26,6 +26,10 @@ public class Pedido {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
+    @ManyToOne
+    @JoinColumn(name = "id_proveedor")
+    private Proveedor proveedor;
+
     public enum EstadoPedido {
         pendiente,
         en_ejecucion,
@@ -34,12 +38,13 @@ public class Pedido {
 
     public Pedido(){}
 
-    public Pedido(int idPedido, Date fechaPedido, EstadoPedido estadoPedido, String comentarios, Usuario usuario) {
+    public Pedido(int idPedido, Date fechaPedido, EstadoPedido estadoPedido, String comentarios, Usuario usuario, Proveedor proveedor) {
         this.idPedido = idPedido;
         this.fechaPedido = fechaPedido;
         this.estadoPedido = estadoPedido;
         this.comentarios = comentarios;
         this.usuario = usuario;
+        this.proveedor = proveedor;
     }
 
     public int getIdPedido() {
@@ -80,5 +85,12 @@ public class Pedido {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 }
