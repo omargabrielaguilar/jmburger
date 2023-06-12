@@ -1,6 +1,5 @@
 package com.jmBurger.entity;
 
-import java.util.Date;
 import jakarta.persistence.*;
 
 @Entity
@@ -29,20 +28,16 @@ public class DetallePedido {
     @Column(name = "precio_total")
     private double precioTotal;
 
-    @Column(name = "fecharegistro")
-    private Date fechaRegistro;
-
     // Constructor, getters, and setters
     public DetallePedido(){}
 
-    public DetallePedido(int idDetallePedido, Pedido pedido, Producto producto, int cantidad, double precioUnitario, double precioTotal, Date fechaRegistro) {
+    public DetallePedido(int idDetallePedido, Pedido pedido, Producto producto, int cantidad, double precioUnitario, double precioTotal) {
         this.idDetallePedido = idDetallePedido;
         this.pedido = pedido;
         this.producto = producto;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
         this.precioTotal = precioTotal;
-        this.fechaRegistro = fechaRegistro;
     }
 
     public int getIdDetallePedido() {
@@ -93,11 +88,4 @@ public class DetallePedido {
         this.precioTotal = precioTotal;
     }
 
-    public Date getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
 }

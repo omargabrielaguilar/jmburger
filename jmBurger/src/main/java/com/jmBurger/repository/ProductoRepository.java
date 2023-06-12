@@ -7,5 +7,6 @@ import com.jmBurger.entity.Producto;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
+    Producto findByNombreProducto(String nombreProducto);
 }
 
