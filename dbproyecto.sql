@@ -65,7 +65,6 @@ CREATE TABLE detalle_pedido (
   cantidad INT NOT NULL,
   precio_unitario DECIMAL(10,2) NOT NULL,
   precio_total DECIMAL(10, 2) AS (cantidad * precio_unitario),
-  fecharegistro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido),
   FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
@@ -82,6 +81,7 @@ CREATE TABLE produccion (
   id_pedido INT NOT NULL,
   id_producto INT NOT NULL,
   cantidad_producida INT NOT NULL,
+  FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido),
   FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
 
@@ -89,7 +89,6 @@ CREATE TABLE detalle_produccion (
   id_detalle_produccion INT AUTO_INCREMENT PRIMARY KEY,
   id_produccion INT NOT NULL,
   id_producto INT NOT NULL,
-  cantidad_producida INT NOT NULL,
   FOREIGN KEY (id_produccion) REFERENCES produccion(id_produccion),
   FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
