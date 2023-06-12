@@ -17,6 +17,4 @@ public class DetalleProduccion {
     @ManyToOne
     @JoinColumn(name = "id_producto")
     private Producto producto;
-
-
 }
