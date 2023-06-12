@@ -97,7 +97,7 @@ public class DetallePedidoController {
         return "redirect:/detallepedidos";
     }
 
-    @GetMapping("pedidos/{id}/borrar")
+    @GetMapping("detallepedidos/{id}/borrar")
     public String borrarDetallePedido(@PathVariable("id") int id){
         detallePedidoRepository.deleteById(id);
         return "redirect:/detallepedidos";
