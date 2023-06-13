@@ -34,4 +34,6 @@ public class ProduccionController {
                 productoRepository.findAll());
         return "nuevaProduccion";
     }
+
+
 }
