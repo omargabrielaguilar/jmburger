@@ -66,7 +66,8 @@ public class ProduccionController {
 
     @GetMapping("produccion/{id}/editar")
     public String mostrarFormularioEditar(@PathVariable("id") int id, Model model){
-        Produccion produccion = produccionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Pedido no encontrado con ID: " + id));
+        Produccion produccion = produccionRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Pedido no encontrado con ID: " + id));
 
         model.addAttribute("produccion", produccion);
         model.addAttribute("pedido", pedidoRepository.findAll());
@@ -77,7 +78,33 @@ public class ProduccionController {
 
     @PostMapping("produccion/{id}/editar")
     public String actualizarProduccion(@PathVariable("id") int id, @ModelAttribute("produccion") Produccion produccion){
+        produccion.setIdProduccion(id);
+
+        Producto producto = productoRepository.findByNombreProducto(produccion.getProducto().getNombreProducto());
+        Pedido pedido = pedidoRepository.findByFechaPedido(produccion.getPedido().getFechaPedido());
+
+
+        if(pedido == null){
+            pedido = new Pedido();
+            pedido.setFechaPedido(produccion.getPedido().getFechaPedido());
+            pedidoRepository.save(pedido);
+        }
+
+        if(producto == null){
+            producto = new Producto();
+            producto.setNombreProducto(produccion.getProducto().getNombreProducto());
+            productoRepository.save(producto);
+        }
+
+        produccion.setProducto(producto);
+        produccion.setPedido(pedido);
+        produccionRepository.save(produccion);
         return "redirect:/produccion";
     }
 
+    @GetMapping("produccion/{id}/borrar")
+    public String borrarProduccion(@PathVariable("id") int id){
+        produccionRepository.deleteById(id);
+        return "redirect:/produccion";
+    }
 }
