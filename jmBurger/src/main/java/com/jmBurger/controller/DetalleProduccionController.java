@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class DetalleProduccionController {
-    @Autowired
-    private ProduccionRepository produccionRepository;
+    //@Autowired
+    //private ProduccionRepository produccionRepository;
     @Autowired
     private ProductoRepository productoRepository;
     @Autowired

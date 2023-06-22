@@ -3,7 +3,6 @@ package com.jmBurger.controller;
 import com.jmBurger.entity.Pedido;
 import com.jmBurger.entity.Produccion;
 import com.jmBurger.entity.Producto;
-import com.jmBurger.entity.Proveedor;
 import com.jmBurger.repository.PedidoRepository;
 import com.jmBurger.repository.ProduccionRepository;
 import com.jmBurger.repository.ProductoRepository;

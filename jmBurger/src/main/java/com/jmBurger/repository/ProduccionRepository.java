@@ -9,6 +9,6 @@ import java.util.Date;
 
 @Repository
 public interface ProduccionRepository extends JpaRepository<Produccion, Integer> {
-    Produccion findByFechaPedido(Date fechaPedido);
+    //Produccion findByFechaPedido(Date fechaPedido);
 
 }
