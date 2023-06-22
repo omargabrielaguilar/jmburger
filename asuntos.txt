@@ -1,0 +1,7 @@
+terminar cruds
+correcion de dates -> enfocarse más en listar
+en la bd ingresar todo los insert para cada tabla
+generar reportes con pdf formato simple para detalles
+hacer un login
+hacer el tema de sesiones
+diseño y homepage
