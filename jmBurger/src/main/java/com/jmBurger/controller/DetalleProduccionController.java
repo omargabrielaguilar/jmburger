@@ -69,7 +69,36 @@ public class DetalleProduccionController {
         return "editarDetalleProduccion";
     }
 
-    @PostMapping
+    @PostMapping("detalleproduccion/{id}/editar")
+    public String actualizarDetalleProduccion(@PathVariable("id") int id, @ModelAttribute("detalleproduccion") DetalleProduccion detalleProduccion){
+        detalleProduccion.setIdDetalleProduccion(id);
 
+        Produccion produccion = produccionRepository.findByFechaProduccion(detalleProduccion.getProduccion().getFechaProduccion());
+
+        Producto producto = productoRepository.findByNombreProducto(detalleProduccion.getProducto().getNombreProducto());
+
+        if(produccion == null){
+            produccion = new Produccion();
+            produccion.setFechaProduccion(detalleProduccion.getProduccion().getFechaProduccion());
+            produccionRepository.save(produccion);
+        }
+
+        if(producto == null){
+            producto = new Producto();
+            producto.setNombreProducto(detalleProduccion.getProducto().getNombreProducto());
+            productoRepository.save(producto);
+        }
+
+        detalleProduccion.setProduccion(produccion);
+        detalleProduccion.setProducto(producto);
+        detalleProduccionRepository.save(detalleProduccion);
+        return "redirect:/detalleproduccion";
+    }
+
+    @GetMapping("detalleproduccion/{id}/borrar")
+    public String borrarDetalleProduccion(@PathVariable("id") int id){
+        detalleProduccionRepository.deleteById(id);
+        return "redirect:/detalleproduccion";
+    }
 
 }
