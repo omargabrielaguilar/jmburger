@@ -2,6 +2,8 @@ package com.jmBurger.entity;
 
 import jakarta.persistence.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -11,6 +13,7 @@ public class Produccion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_produccion")
     private int idProduccion;
+    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_produccion")
     private Date fechaProduccion;
     @ManyToOne
@@ -72,5 +75,25 @@ public class Produccion {
 
     public void setCantidadProducida(int cantidadProducida) {
         this.cantidadProducida = cantidadProducida;
+    }
+
+    public String getFechaPedidoAsString() {
+        if (pedido != null) {
+            return pedido.getFechaPedido().toString();
+        }
+        return null;
+    }
+
+    public void setFechaPedidoAsString(String fechaPedidoAsString) {
+        if (pedido == null) {
+            pedido = new Pedido();
+        }
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaPedido = sdf.parse(fechaPedidoAsString);
+            pedido.setFechaPedido(fechaPedido);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }
