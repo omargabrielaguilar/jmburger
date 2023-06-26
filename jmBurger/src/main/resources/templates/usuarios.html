@@ -26,7 +26,6 @@
       <th>ID</th>
       <th>Nombre</th>
       <th>Correo Electronico</th>
-      <th>Contrasenia</th>
       <th>Acciones</th>
     </tr>
     </thead>
@@ -35,7 +34,6 @@
       <td th:text="${usuario.idUsuario}"></td>
       <td th:text="${usuario.nombreUsuario}"></td>
       <td th:text="${usuario.correoElectronico}"></td>
-      <td th:text="${usuario.contraseniaHash}"></td>
       <td th:text="${usuario.categoriaUsuario.nombreCategoriaUsuario}"></td>
       <td>
         <a class="btn btn-primary btn-sm" th:href="@{usuarios/{id}/editar(id=${usuario.idUsuario})}">Editar</a>
