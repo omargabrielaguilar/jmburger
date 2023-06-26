@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Crear Pedido</title>
+  <title>Crear Producción</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,36 +33,27 @@
 </head>
 <body>
 <div class="container">
-  <h1>Crear Pedido</h1>
-  <form action="/pedidos/nuevo" method="post">
+  <h1>Crear Producción</h1>
+  <form action="/produccion/nuevo" method="post">
     <div class="mb-3">
-      <label for="fechaPedido" class="form-label">Fecha pedido:</label>
-      <input type="text" class="form-control datetimepicker" id="fechaPedido" name="fechaPedido" required>
+      <label for="fechaProduccion" class="form-label">Fecha Producción:</label>
+      <input type="text" class="form-control datetimepicker" id="fechaProduccion" name="fechaProduccion" required>
     </div>
     <div class="mb-3">
-      <label for="estadoPedido" class="form-label">Estado de Pedido:</label>
-      <select id="estadoPedido" name="estadoPedido" class="form-select" required>
-        <option value="pendiente">pendiente</option>
-        <option value="en_ejecucion">en_ejecucion</option>
-        <option value="entregado">entregado</option>
+      <label for="pedido" class="form-label">Fecha Pedido:</label>
+      <select id="pedido" name="pedido.fechaPedido" class="form-select" required>
+        <option th:each="pedido : ${pedido}" th:value="${pedido.fechaPedido}" th:text="${pedido.fechaPedido}"></option>
       </select>
     </div>
     <div class="mb-3">
-      <label for="comentarios" class="form-label">Comentarios:</label>
-      <input type="text" id="comentarios" name="comentarios" step="0.01" class="form-control" required>
-    </div>
-    <div class="mb-3">
-      <label for="usuario" class="form-label">Nombre Usuario:</label>
-      <select id="usuario" name="usuario.nombreUsuario" class="form-select" required>
-        <option th:each="usuario : ${usuario}" th:value="${usuario.nombreUsuario}" th:text="${usuario.nombreUsuario}"></option>
+      <label for="producto" class="form-label">Nombre Producto:</label>
+      <select id="producto" name="producto.nombreProducto" class="form-select" required>
+        <option th:each="producto : ${producto}" th:value="${producto.nombreProducto}" th:text="${producto.nombreProducto}"></option>
       </select>
     </div>
-
     <div class="mb-3">
-      <label for="proveedor" class="form-label">Nombre Proveedor:</label>
-      <select id="proveedor" name="proveedor.nombreProveedor" class="form-select" required>
-        <option th:each="proveedor : ${proveedor}" th:value="${proveedor.nombreProveedor}" th:text="${proveedor.nombreProveedor}"></option>
-      </select>
+      <label for="cantidadProducida" class="form-label">Cantidad Producida:</label>
+      <input type="text" id="cantidadProducida" name="cantidadProducida" step="0.01" class="form-control" required>
     </div>
     <div>
       <button type="submit" class="btn btn-primary">Guardar</button>

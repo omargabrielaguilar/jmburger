@@ -49,7 +49,7 @@ CREATE TABLE proveedor (
 
 CREATE TABLE pedido (
   id_pedido INT AUTO_INCREMENT PRIMARY KEY,
-  fecha_pedido DATETIME NOT NULL,
+  fecha_pedido DATE NOT NULL,
   estado_pedido ENUM('pendiente', 'en_ejecucion', 'entregado') NOT NULL,
   comentarios VARCHAR(255),
   id_usuario INT NOT NULL,
@@ -77,7 +77,7 @@ INSERT INTO categoria (nombre_categoria, descripcion) VALUES ('Panes', 'Categor√
 
 CREATE TABLE produccion (
   id_produccion INT AUTO_INCREMENT PRIMARY KEY,
-  fecha_produccion DATETIME NOT NULL,
+  fecha_produccion DATE NOT NULL,
   id_pedido INT NOT NULL,
   id_producto INT NOT NULL,
   cantidad_producida INT NOT NULL,
