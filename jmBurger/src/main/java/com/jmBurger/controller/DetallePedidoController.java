@@ -26,7 +26,7 @@ public class DetallePedidoController {
         model.addAttribute("detallepedidos",detallePedidoRepository.findAll());
         return "detallepedidos";
     }
-
+/*
     @GetMapping("detallepedidos/nuevo")
     public String mostrarFormularioNuevo(Model model){
         model.addAttribute("detallepedido",new DetallePedido());
@@ -102,5 +102,5 @@ public class DetallePedidoController {
         detallePedidoRepository.deleteById(id);
         return "redirect:/detallepedidos";
     }
-
+*/
 }

@@ -8,6 +8,7 @@ import com.jmBurger.repository.ProduccionRepository;
 import com.jmBurger.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -37,6 +38,7 @@ public class ProduccionController {
         return "produccion";
     }
 
+/*
     @GetMapping("produccion/nuevo")
     public String mostrarFormularioNuevo(Model model){
         model.addAttribute("produccion", new Produccion());
@@ -47,7 +49,7 @@ public class ProduccionController {
         return "nuevaProduccion";
     }
 
-    @PostMapping("produccion/nuevo")
+    @PostMapping("/produccion/nuevo")
     public String crearProduccion(@ModelAttribute("produccion") Produccion produccion) {
         Producto producto = productoRepository.findByNombreProducto(produccion.getProducto().getNombreProducto());
         Pedido pedido = pedidoRepository.findByFechaPedido(produccion.getPedido().getFechaPedido());
@@ -70,6 +72,7 @@ public class ProduccionController {
 
         return "redirect:/produccion";
     }
+
 
 
     @GetMapping("produccion/{id}/editar")
@@ -115,4 +118,6 @@ public class ProduccionController {
         produccionRepository.deleteById(id);
         return "redirect:/produccion";
     }
+*/
+
 }

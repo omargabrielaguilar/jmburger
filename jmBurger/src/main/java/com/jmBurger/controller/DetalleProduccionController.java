@@ -24,7 +24,7 @@ public class DetalleProduccionController {
         model.addAttribute("detalleproduccion", detalleProduccionRepository.findAll());
         return "detalleproduccion";
     }
-
+/*
     @GetMapping("detalleproduccion/nuevo")
     public String mostrarFormularioNuevo(Model model){
         model.addAttribute("detalleproduccion", new DetalleProduccion());
@@ -100,5 +100,5 @@ public class DetalleProduccionController {
         detalleProduccionRepository.deleteById(id);
         return "redirect:/detalleproduccion";
     }
-
+*/
 }
