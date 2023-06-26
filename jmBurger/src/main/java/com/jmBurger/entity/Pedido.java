@@ -11,7 +11,7 @@ public class Pedido {
     @Column(name = "id_pedido")
     private int idPedido;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_pedido")
     private Date fechaPedido;
 
