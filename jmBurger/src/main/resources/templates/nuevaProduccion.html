@@ -16,11 +16,12 @@
   <script>
     $(document).ready(function() {
       $('.datetimepicker').datepicker({
-        format: 'YYYY-MM-DD',
+        format: 'yyyy-mm-dd',
         sideBySide: true,
         showClear: true
-      });
+      })
     });
+
   </script>
 
   <style>
@@ -42,9 +43,10 @@
     <div class="mb-3">
       <label for="pedido" class="form-label">Fecha Pedido:</label>
       <select id="pedido" name="pedido.fechaPedido" class="form-select" required>
-        <option th:each="pedido : ${pedido}" th:value="${pedido.fechaPedido}" th:text="${pedido.fechaPedido}"></option>
+        <option th:each="pedido : ${pedido}" th:value="${pedido.fechaPedido}" th:text="${#dates.format(pedido.fechaPedido, 'yyyy-MM-dd')}"></option>
       </select>
     </div>
+
     <div class="mb-3">
       <label for="producto" class="form-label">Nombre Producto:</label>
       <select id="producto" name="producto.nombreProducto" class="form-select" required>

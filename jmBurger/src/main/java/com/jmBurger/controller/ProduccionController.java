@@ -7,14 +7,17 @@ import com.jmBurger.repository.PedidoRepository;
 import com.jmBurger.repository.ProduccionRepository;
 import com.jmBurger.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+
 
 @Controller
 public class ProduccionController {
@@ -43,20 +46,20 @@ public class ProduccionController {
     }
 
     @PostMapping("produccion/nuevo")
-    public String crearProduccion(@ModelAttribute("produccion") Produccion produccion, @RequestParam("fechaPedido") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaPedido){
+    public String crearProduccion(@ModelAttribute("produccion") Produccion produccion) {
         Producto producto = productoRepository.findByNombreProducto(produccion.getProducto().getNombreProducto());
-        Pedido pedido = produccion.getPedido();
-        if (pedido != null) {
-            pedido.getFechaPedido();
-        }
+        Pedido pedido = pedidoRepository.findByFechaPedido(produccion.getPedido().getFechaPedido());
 
-        if(pedido == null){
+
+        if (pedido == null) {
             pedido = new Pedido();
             pedido.setFechaPedido(produccion.getPedido().getFechaPedido());
             pedidoRepository.save(pedido);
         }
 
-        if(producto == null){
+
+
+        if (producto == null) {
             producto = new Producto();
             producto.setNombreProducto(produccion.getProducto().getNombreProducto());
             productoRepository.save(producto);
@@ -65,10 +68,9 @@ public class ProduccionController {
         produccion.setPedido(pedido);
         produccion.setProducto(producto);
         produccionRepository.save(produccion);
+
         return "redirect:/produccion";
     }
-
-
 
 
     @GetMapping("produccion/{id}/editar")
