@@ -7,12 +7,14 @@ import com.jmBurger.repository.PedidoRepository;
 import com.jmBurger.repository.ProduccionRepository;
 import com.jmBurger.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class ProduccionController {
@@ -41,9 +43,12 @@ public class ProduccionController {
     }
 
     @PostMapping("produccion/nuevo")
-    public String crearProduccion(@ModelAttribute("produccion") Produccion produccion){
+    public String crearProduccion(@ModelAttribute("produccion") Produccion produccion, @RequestParam("fechaPedido") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaPedido){
         Producto producto = productoRepository.findByNombreProducto(produccion.getProducto().getNombreProducto());
-        Pedido pedido = pedidoRepository.findByFechaPedido(produccion.getPedido().getFechaPedido());
+        Pedido pedido = produccion.getPedido();
+        if (pedido != null) {
+            pedido.getFechaPedido();
+        }
 
         if(pedido == null){
             pedido = new Pedido();
@@ -62,6 +67,9 @@ public class ProduccionController {
         produccionRepository.save(produccion);
         return "redirect:/produccion";
     }
+
+
+
 
     @GetMapping("produccion/{id}/editar")
     public String mostrarFormularioEditar(@PathVariable("id") int id, Model model){

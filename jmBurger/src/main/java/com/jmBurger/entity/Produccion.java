@@ -77,23 +77,4 @@ public class Produccion {
         this.cantidadProducida = cantidadProducida;
     }
 
-    public String getFechaPedidoAsString() {
-        if (pedido != null) {
-            return pedido.getFechaPedido().toString();
-        }
-        return null;
-    }
-
-    public void setFechaPedidoAsString(String fechaPedidoAsString) {
-        if (pedido == null) {
-            pedido = new Pedido();
-        }
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date fechaPedido = sdf.parse(fechaPedidoAsString);
-            pedido.setFechaPedido(fechaPedido);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
 }
