@@ -69,6 +69,7 @@ public class DetalleProduccionController {
         return "editarDetalleProduccion";
     }
 
+    @PostMapping
 
 
 }
