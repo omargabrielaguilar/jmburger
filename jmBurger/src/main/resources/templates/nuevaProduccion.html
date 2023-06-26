@@ -22,6 +22,17 @@
       })
     });
 
+    function convertirFechaPedido() {
+      var fechaPedidoSelect = document.getElementById("pedido");
+      var fechaPedidoString = fechaPedidoSelect.value;
+
+      var fechaPedido = new Date(fechaPedidoString);
+
+      // Ejemplo de lógica adicional con la fecha seleccionada
+      console.log("Fecha Pedido seleccionada:", fechaPedido);
+
+    }
+
   </script>
 
   <style>
@@ -42,8 +53,8 @@
     </div>
     <div class="mb-3">
       <label for="pedido" class="form-label">Fecha Pedido:</label>
-      <select id="pedido" name="pedido.fechaPedido" class="form-select" required>
-        <option th:each="pedido : ${pedido}" th:value="${pedido.fechaPedido}" th:text="${#dates.format(pedido.fechaPedido, 'yyyy-MM-dd')}"></option>
+      <select id="pedido" name="pedido.fechaPedido" class="form-select" required onchange="convertirFechaPedido()">
+        <option th:each="pedido : ${pedido}" th:value="${pedido.fechaPedido}" th:text="${pedido.fechaPedido}"></option>
       </select>
     </div>
 

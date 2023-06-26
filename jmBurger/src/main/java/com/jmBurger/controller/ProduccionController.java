@@ -14,6 +14,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -50,14 +52,11 @@ public class ProduccionController {
         Producto producto = productoRepository.findByNombreProducto(produccion.getProducto().getNombreProducto());
         Pedido pedido = pedidoRepository.findByFechaPedido(produccion.getPedido().getFechaPedido());
 
-
         if (pedido == null) {
             pedido = new Pedido();
             pedido.setFechaPedido(produccion.getPedido().getFechaPedido());
             pedidoRepository.save(pedido);
         }
-
-
 
         if (producto == null) {
             producto = new Producto();
