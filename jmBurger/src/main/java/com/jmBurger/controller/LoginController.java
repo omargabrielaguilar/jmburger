@@ -1,5 +1,3 @@
-/*
-
 package com.jmBurger.controller;
 
 import com.jmBurger.entity.Usuario;
@@ -47,6 +45,15 @@ public class LoginController {
     public String showDashboard() {
         return "dashboard";
     }
+
+
+    @GetMapping("/logout")
+    public String logout() {
+        // Realizar las acciones de cierre de sesión si es necesario
+
+        // Redirigir a la página de inicio de sesión
+        return "redirect:/login";
+    }
+
 }
 
-*/
