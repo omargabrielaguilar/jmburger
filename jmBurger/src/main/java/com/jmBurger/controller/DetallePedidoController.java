@@ -28,8 +28,17 @@ public class DetallePedidoController {
     @Autowired
     private DetallePedidoRepository detallePedidoRepository;
 
+    private boolean autenticado = false;
+
+    public void setAutenticado(boolean autenticado) {
+        this.autenticado = autenticado;
+    }
+
     @GetMapping("detallepedidos")
     public String listarPedido(Model model){
+        if (!autenticado) {
+            return "redirect:/login";
+        }
         model.addAttribute("detallepedidos",detallePedidoRepository.findAll());
         return "detallepedidos";
     }

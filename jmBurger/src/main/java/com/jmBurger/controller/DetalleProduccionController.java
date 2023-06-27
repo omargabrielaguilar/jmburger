@@ -26,8 +26,17 @@ public class DetalleProduccionController {
     @Autowired
     private DetalleProduccionRepository detalleProduccionRepository;
 
+    private boolean autenticado = false;
+
+    public void setAutenticado(boolean autenticado) {
+        this.autenticado = autenticado;
+    }
+
     @GetMapping("detalleproduccion")
     public String listarDetalleProduccion(Model model){
+        if (!autenticado) {
+            return "redirect:/login";
+        }
         model.addAttribute("detalleproduccion", detalleProduccionRepository.findAll());
         return "detalleproduccion";
     }

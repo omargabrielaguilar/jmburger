@@ -17,17 +17,19 @@ public class LoginController {
     //tema de sesionesss
     private final CategoriaController categoriaController;
     private final CategoriaUsuarioController categoriaUsuarioController;
-
-
+    private final DetallePedidoController detallePedidoController;
+    private final DetalleProduccionController detalleProduccionController;
 
 
     private boolean autenticado = false;
 
     @Autowired
-    public LoginController(UsuarioRepository usuarioRepository, CategoriaController categoriaController, CategoriaUsuarioController categoriaUsuarioController) {
+    public LoginController(UsuarioRepository usuarioRepository, CategoriaController categoriaController, CategoriaUsuarioController categoriaUsuarioController, DetallePedidoController detallePedidoController,DetalleProduccionController detalleProduccionController) {
         this.usuarioRepository = usuarioRepository;
         this.categoriaController = categoriaController;
         this.categoriaUsuarioController = categoriaUsuarioController;
+        this.detallePedidoController = detallePedidoController;
+        this.detalleProduccionController= detalleProduccionController;
     }
 
     @GetMapping("/login")
@@ -46,6 +48,10 @@ public class LoginController {
             System.out.println("Credenciales válidas. Redireccionando al dashboard");
             categoriaController.setAutenticado(true);
             categoriaUsuarioController.setAutenticado(true);
+            detallePedidoController.setAutenticado(true);
+            detalleProduccionController.setAutenticado(true);
+
+
 
 
             autenticado = true; // Marcar al usuario como autenticado
