@@ -13,10 +13,49 @@
             margin-top: 30px;
             font-family: 'Nunito Sans', sans-serif;
         }
+        .navbar {
+            background-color: chocolate;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
 <div class="container">
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/dashboard">JMBurger</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/usuarios">Usuarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/categorias">Categorías</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/detallepedidos">Detalle Pedidos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/detalleproduccion">Detalle Producción</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pedidos">Pedidos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/produccion">Producción</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/productos">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/proveedores">Proveedores</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <h1>Editar Usuario</h1>
     <form th:action="@{/usuarios/{id}/editar(id=${usuario.idUsuario})}" th:object="${usuario}" method="post">
         <input type="hidden" th:field="*{idUsuario}">
