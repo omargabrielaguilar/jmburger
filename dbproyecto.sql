@@ -272,3 +272,5 @@ VALUES (1, 1),
        (5, 9),
        (1, 10);
 
+update usuario set contrasenia_hash = '123';
+
