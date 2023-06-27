@@ -44,16 +44,20 @@
                     <form action="/login" method="post">
                         <div class="mb-4">
                             <label for="nombreUsuario" class="form-label">Username/Email</label>
-                            <input type="text" class="form-control" id="nombreUsuario" required />
+                            <input type="text" class="form-control"  id="nombreUsuario" name="nombreUsuario" required />
                         </div>
                         <div class="mb-4">
                             <label for="contraseniaHash" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="contraseniaHash" required />
+                            <input type="password" class="form-control"  id="contraseniaHash" name="contraseniaHash" required />
                         </div>
                         <div class="d-grid">
                             <a class="btn btn-success" href="/dashboard">Ingresar</a>
                         </div>
                     </form>
+                    <!-- Mostrar mensaje de error -->
+                    <div th:if="${error}" class="alert alert-danger mt-3">
+                        <p th:text="${error}"></p>
+                    </div>
                 </div>
             </div>
         </div>
