@@ -21,8 +21,17 @@ public class ProductoController {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 
+	private boolean autenticado = false;
+
+	public void setAutenticado(boolean autenticado) {
+		this.autenticado = autenticado;
+	}
+
 	@GetMapping("productos")
 	public String listarProductos(Model model) {
+		if (!autenticado) {
+			return "redirect:/login";
+		}
 		model.addAttribute("productos", productoRepository.findAll());
 		return "productos";
 	}

@@ -14,22 +14,32 @@ public class LoginController {
 
     private final UsuarioRepository usuarioRepository;
 
-    //tema de sesionesss
+    //tema de sesionesss   -- esto es una pesima práctica
     private final CategoriaController categoriaController;
     private final CategoriaUsuarioController categoriaUsuarioController;
     private final DetallePedidoController detallePedidoController;
     private final DetalleProduccionController detalleProduccionController;
+    private final PedidoController pedidoController;
+    private final ProduccionController produccionController;
+    private final ProductoController productoController;
+    private final ProveedorController proveedorController;
+    private final UsuarioController usuarioController;
 
 
     private boolean autenticado = false;
 
     @Autowired
-    public LoginController(UsuarioRepository usuarioRepository, CategoriaController categoriaController, CategoriaUsuarioController categoriaUsuarioController, DetallePedidoController detallePedidoController,DetalleProduccionController detalleProduccionController) {
+    public LoginController(UsuarioRepository usuarioRepository, CategoriaController categoriaController, CategoriaUsuarioController categoriaUsuarioController, DetallePedidoController detallePedidoController,DetalleProduccionController detalleProduccionController,PedidoController pedidoController, ProduccionController produccionController, ProductoController productoController, ProveedorController proveedorController, UsuarioController usuarioController) {
         this.usuarioRepository = usuarioRepository;
         this.categoriaController = categoriaController;
         this.categoriaUsuarioController = categoriaUsuarioController;
         this.detallePedidoController = detallePedidoController;
         this.detalleProduccionController= detalleProduccionController;
+        this.pedidoController = pedidoController;
+        this.produccionController = produccionController;
+        this.productoController = productoController;
+        this.proveedorController = proveedorController;
+        this.usuarioController = usuarioController;
     }
 
     @GetMapping("/login")
@@ -50,8 +60,11 @@ public class LoginController {
             categoriaUsuarioController.setAutenticado(true);
             detallePedidoController.setAutenticado(true);
             detalleProduccionController.setAutenticado(true);
-
-
+            pedidoController.setAutenticado(true);
+            produccionController.setAutenticado(true);
+            productoController.setAutenticado(true);
+            proveedorController.setAutenticado(true);
+            usuarioController.setAutenticado(true);
 
 
             autenticado = true; // Marcar al usuario como autenticado

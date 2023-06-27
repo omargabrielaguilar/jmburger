@@ -17,12 +17,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UsuarioController {
     @Autowired
     private CategoriaUsuarioRepository categoriaUsuarioRepository;
-
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    private boolean autenticado = false;
+
+    public void setAutenticado(boolean autenticado) {
+        this.autenticado = autenticado;
+    }
+
     @GetMapping("usuarios")
     public String listarUsuarios(Model model){
+        if (!autenticado) {
+            return "redirect:/login";
+        }
         model.addAttribute("usuarios", usuarioRepository.findAll());
         return "usuarios";
     }

@@ -15,8 +15,17 @@ public class ProveedorController {
     @Autowired
     private ProveedorRepository proveedorRepository;
 
+    private boolean autenticado = false;
+
+    public void setAutenticado(boolean autenticado) {
+        this.autenticado = autenticado;
+    }
+
     @GetMapping("proveedores")
     public String listarProveedores(Model model){
+        if (!autenticado) {
+            return "redirect:/login";
+        }
         model.addAttribute("proveedores", proveedorRepository.findAll());
         return "proveedores";
     }

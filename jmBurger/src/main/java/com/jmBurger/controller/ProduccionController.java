@@ -31,93 +31,20 @@ public class ProduccionController {
     @Autowired
     PedidoRepository pedidoRepository;
 
+    private boolean autenticado = false;
+
+    public void setAutenticado(boolean autenticado) {
+        this.autenticado = autenticado;
+    }
+
     @GetMapping("produccion")
     public String listarProduccion(Model model){
+        if (!autenticado) {
+            return "redirect:/login";
+        }
         model.addAttribute("produccion",
                 produccionRepository.findAll());
         return "produccion";
     }
-
-/*
-    @GetMapping("produccion/nuevo")
-    public String mostrarFormularioNuevo(Model model){
-        model.addAttribute("produccion", new Produccion());
-        model.addAttribute("pedido",
-                pedidoRepository.findAll());
-        model.addAttribute("producto",
-                productoRepository.findAll());
-        return "nuevaProduccion";
-    }
-
-    @PostMapping("/produccion/nuevo")
-    public String crearProduccion(@ModelAttribute("produccion") Produccion produccion) {
-        Producto producto = productoRepository.findByNombreProducto(produccion.getProducto().getNombreProducto());
-        Pedido pedido = pedidoRepository.findByFechaPedido(produccion.getPedido().getFechaPedido());
-
-        if (pedido == null) {
-            pedido = new Pedido();
-            pedido.setFechaPedido(produccion.getPedido().getFechaPedido());
-            pedidoRepository.save(pedido);
-        }
-
-        if (producto == null) {
-            producto = new Producto();
-            producto.setNombreProducto(produccion.getProducto().getNombreProducto());
-            productoRepository.save(producto);
-        }
-
-        produccion.setPedido(pedido);
-        produccion.setProducto(producto);
-        produccionRepository.save(produccion);
-
-        return "redirect:/produccion";
-    }
-
-
-
-    @GetMapping("produccion/{id}/editar")
-    public String mostrarFormularioEditar(@PathVariable("id") int id, Model model){
-        Produccion produccion = produccionRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Pedido no encontrado con ID: " + id));
-
-        model.addAttribute("produccion", produccion);
-        model.addAttribute("pedido", pedidoRepository.findAll());
-        model.addAttribute("producto", productoRepository.findAll());
-
-        return "editarProduccion";
-    }
-
-    @PostMapping("produccion/{id}/editar")
-    public String actualizarProduccion(@PathVariable("id") int id, @ModelAttribute("produccion") Produccion produccion){
-        produccion.setIdProduccion(id);
-
-        Producto producto = productoRepository.findByNombreProducto(produccion.getProducto().getNombreProducto());
-        Pedido pedido = pedidoRepository.findByFechaPedido(produccion.getPedido().getFechaPedido());
-
-
-        if(pedido == null){
-            pedido = new Pedido();
-            pedido.setFechaPedido(produccion.getPedido().getFechaPedido());
-            pedidoRepository.save(pedido);
-        }
-
-        if(producto == null){
-            producto = new Producto();
-            producto.setNombreProducto(produccion.getProducto().getNombreProducto());
-            productoRepository.save(producto);
-        }
-
-        produccion.setProducto(producto);
-        produccion.setPedido(pedido);
-        produccionRepository.save(produccion);
-        return "redirect:/produccion";
-    }
-
-    @GetMapping("produccion/{id}/borrar")
-    public String borrarProduccion(@PathVariable("id") int id){
-        produccionRepository.deleteById(id);
-        return "redirect:/produccion";
-    }
-*/
 
 }
