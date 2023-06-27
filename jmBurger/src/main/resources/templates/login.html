@@ -1,20 +1,64 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Inicio de Sesión</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
+    <style>
+        :root{
+            --main-bg:#d2691e;
+        }
+
+        .main-bg {
+            background: var(--main-bg) !important;
+        }
+
+        input:focus, button:focus {
+            border: 1px solid var(--main-bg) !important;
+            box-shadow: none !important;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--main-bg) !important;
+            border-color: var(--main-bg) !important;
+        }
+
+        .card, .btn, input{
+            border-radius:0 !important;
+        }
+
+    </style>
 </head>
-<body>
-<h2>Inicio de Sesión</h2>
-<form action="/login" method="post">
-    <div>
-        <label for="nombreUsuario">Usuario:</label>
-        <input type="text" id="nombreUsuario" name="nombreUsuario" required>
+
+<body class="main-bg">
+<!-- Login Form -->
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card shadow">
+                <div class="card-title text-center border-bottom">
+                    <h2 class="p-3">Iniciar Sesión</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/login" method="post">
+                        <div class="mb-4">
+                            <label for="nombreUsuario" class="form-label">Username/Email</label>
+                            <input type="text" class="form-control" id="nombreUsuario" required />
+                        </div>
+                        <div class="mb-4">
+                            <label for="contraseniaHash" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="contraseniaHash" required />
+                        </div>
+                        <div class="d-grid">
+                            <a class="btn btn-success" href="/dashboard">Ingresar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="contraseniaHash">Contraseña:</label>
-        <input type="password" id="contraseniaHash" name="contraseniaHash" required>
-    </div>
-    <a class="btn btn-success" href="/dashboard">login</a>
-</form>
+</div>
 </body>
+
 </html>
