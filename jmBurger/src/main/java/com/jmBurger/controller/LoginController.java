@@ -14,9 +14,14 @@ public class LoginController {
 
     private final UsuarioRepository usuarioRepository;
 
+    private final CategoriaController categoriaController;
+
+    private boolean autenticado = false;
+
     @Autowired
-    public LoginController(UsuarioRepository usuarioRepository) {
+    public LoginController(UsuarioRepository usuarioRepository, CategoriaController categoriaController) {
         this.usuarioRepository = usuarioRepository;
+        this.categoriaController = categoriaController;
     }
 
     @GetMapping("/login")
@@ -31,6 +36,8 @@ public class LoginController {
         Usuario usuario = usuarioRepository.findByNombreUsuario(nombreUsuario);
         if (usuario != null && nombreUsuario.equals(usuario.getNombreUsuario()) && contraseniaHash.equals(usuario.getContraseniaHash())) {
             System.out.println("Credenciales válidas. Redireccionando al dashboard");
+            categoriaController.setAutenticado(true);
+            autenticado = true; // Marcar al usuario como autenticado
             // Credenciales válidas, redirigir al dashboard
             return "redirect:/dashboard";
         } else {
@@ -43,13 +50,17 @@ public class LoginController {
 
     @GetMapping("/dashboard")
     public String showDashboard() {
+        if (!autenticado) {
+            // El usuario no está autenticado, redirigir al login
+            return "redirect:/login";
+        }
         return "dashboard";
     }
-
 
     @GetMapping("/logout")
     public String logout() {
         // Realizar las acciones de cierre de sesión si es necesario
+        autenticado = false; // Marcar al usuario como no autenticado
 
         // Redirigir a la página de inicio de sesión
         return "redirect:/login";
@@ -59,7 +70,5 @@ public class LoginController {
     public String redirectToLogin() {
         return "redirect:/login";
     }
-
-
 }
 

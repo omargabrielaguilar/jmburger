@@ -16,8 +16,19 @@ public class CategoriaController {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    private boolean autenticado = false;
+
+    public void setAutenticado(boolean autenticado) {
+        this.autenticado = autenticado;
+    }
+
     @GetMapping("categorias")
     public String listarCategorias(Model model){
+        if (!autenticado) {
+            return "redirect:/login";
+        }
+
+
         model.addAttribute("categorias",
                 categoriaRepository.findAll());
         return "categorias";
