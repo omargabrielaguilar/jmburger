@@ -30,9 +30,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
                 .authorizeRequests((authorizeRequests) ->
                         authorizeRequests
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
@@ -40,13 +37,14 @@ public class SecurityConfig {
                                 .requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated()
                 )
-
+                /*
                 .formLogin((formLogin) ->
                         formLogin
                                 .loginPage("/login")
-                                .defaultSuccessUrl("/dashboard", true)
+                                .defaultSuccessUrl("/dashboard")
                                 .permitAll()
                 )
+                */
                 .logout((logout) ->
                         logout
                                 .permitAll()
