@@ -14,14 +14,20 @@ public class LoginController {
 
     private final UsuarioRepository usuarioRepository;
 
+    //tema de sesionesss
     private final CategoriaController categoriaController;
+    private final CategoriaUsuarioController categoriaUsuarioController;
+
+
+
 
     private boolean autenticado = false;
 
     @Autowired
-    public LoginController(UsuarioRepository usuarioRepository, CategoriaController categoriaController) {
+    public LoginController(UsuarioRepository usuarioRepository, CategoriaController categoriaController, CategoriaUsuarioController categoriaUsuarioController) {
         this.usuarioRepository = usuarioRepository;
         this.categoriaController = categoriaController;
+        this.categoriaUsuarioController = categoriaUsuarioController;
     }
 
     @GetMapping("/login")
@@ -35,8 +41,13 @@ public class LoginController {
         // Verificar las credenciales del usuario
         Usuario usuario = usuarioRepository.findByNombreUsuario(nombreUsuario);
         if (usuario != null && nombreUsuario.equals(usuario.getNombreUsuario()) && contraseniaHash.equals(usuario.getContraseniaHash())) {
+
+
             System.out.println("Credenciales válidas. Redireccionando al dashboard");
             categoriaController.setAutenticado(true);
+            categoriaUsuarioController.setAutenticado(true);
+
+
             autenticado = true; // Marcar al usuario como autenticado
             // Credenciales válidas, redirigir al dashboard
             return "redirect:/dashboard";

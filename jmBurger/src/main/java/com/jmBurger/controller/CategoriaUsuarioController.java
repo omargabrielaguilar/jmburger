@@ -16,8 +16,17 @@ public class CategoriaUsuarioController {
     @Autowired
     private CategoriaUsuarioRepository categoriaUsuarioRepository;
 
+    private boolean autenticado = false;
+
+    public void setAutenticado(boolean autenticado) {
+        this.autenticado = autenticado;
+    }
+
     @GetMapping("categoriausuarios")
     public String listarCategoriaUsuarios(Model model){
+        if (!autenticado) {
+            return "redirect:/login";
+        }
         model.addAttribute("categoriausuarios",
                 categoriaUsuarioRepository.findAll());
         return "categoriausuarios";
